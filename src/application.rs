@@ -395,7 +395,7 @@ async fn setup_admin_account(
           let user_id = admin_user.id.parse::<uuid::Uuid>()?;
           let result = sqlx::query!(
             r#"
-            UPDATE auth.users
+            UPDATE users
             SET role = 'supabase_admin', email_confirmed_at = NOW()
             WHERE id = $1
             "#,

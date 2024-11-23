@@ -52,7 +52,7 @@ pub async fn setup_db(pool: &PgPool) -> anyhow::Result<()> {
   sqlx::query(r#"create schema auth"#).execute(pool).await?;
   sqlx::query(
     r#"
-      CREATE TABLE auth.users(
+      CREATE TABLE users(
         id uuid NOT NULL UNIQUE,
         deleted_at timestamptz null,
         CONSTRAINT users_pkey PRIMARY KEY (id)

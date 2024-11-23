@@ -1,7 +1,7 @@
 GRANT SELECT, INSERT, UPDATE, DELETE ON public.af_user TO supabase_auth_admin;
 
 -- Trigger Function to delete a user from the pulic.af_user table
--- when a user is deleted from auth.users table (with matching uuid) field
+-- when a user is deleted from users table (with matching uuid) field
 CREATE OR REPLACE FUNCTION public.delete_user()
 RETURNS TRIGGER AS $$
 BEGIN
@@ -11,7 +11,7 @@ END;
 $$ LANGUAGE plpgsql;
 
 CREATE TRIGGER delete_user_trigger
-AFTER DELETE ON auth.users
+AFTER DELETE ON users
 FOR EACH ROW EXECUTE FUNCTION public.delete_user();
 
 -- Trigger Function to update the 'deleted_at' field in the pulic.af_user table
@@ -31,5 +31,5 @@ END;
 $$ LANGUAGE plpgsql;
 
 CREATE TRIGGER update_af_user_deleted_at_trigger
-AFTER UPDATE OF deleted_at ON auth.users
+AFTER UPDATE OF deleted_at ON users
 FOR EACH ROW EXECUTE FUNCTION public.update_af_user_deleted_at();
